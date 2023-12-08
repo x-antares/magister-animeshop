@@ -10,4 +10,6 @@ class Author extends Model
 {
     use HasFactory,
         HasUuidTrait;
+
+    protected $guarded = ['id'];
 }

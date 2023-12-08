@@ -20,11 +20,12 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'name' => 'admin',
             'email' => 'admin@test.com',
             'email_verified_at' => now(),
-            'password' => '$2y$10$4bOIPMNbZEmrNLbfbZEuweszdyp6.2HVEwAA3m0RiM8cpJSdNaAqy', // password
+            'password' => Hash::make('1234'),
             'remember_token' => Str::random(10),
         ];
     }

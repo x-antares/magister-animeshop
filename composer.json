@@ -6,7 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "fomvasss/laravel-lte3": "^1.20",
+        "fomvasss/laravel-lte3": "^1.21",
+        "fomvasss/laravel-medialibrary-extension": "^5.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",

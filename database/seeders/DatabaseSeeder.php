@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Author;
+use App\Models\Page;
+use App\Models\Picture;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,7 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(FirstSeeder::class);
-        $this->call(SecondSeeder::class);
+        User::factory()->create();
+        Page::factory()->count(5)->create();
+        Author::factory()->count(5)->create();
+        Picture::factory()->count(5)->create();
     }
 }

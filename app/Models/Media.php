@@ -4,10 +4,8 @@ namespace App\Models;
 
 use App\Http\Traits\HasUuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Media extends \Spatie\MediaLibrary\MediaCollections\Models\Media
 {
-    use HasFactory,
-        HasUuidTrait;
+    use HasFactory, HasUuidTrait;
 }

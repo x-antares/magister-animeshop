@@ -20,22 +20,44 @@
             </div>
         </div>
         @endauth
-        @if(config('lte3.view.sidebar.search'))
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                <i class="fas fa-search fa-fw"></i>
-                </button>
-            </div>
-            </div>
-        </div>
-        @endif
+{{--        @if(config('lte3.view.sidebar.search'))--}}
+{{--        <!-- SidebarSearch Form -->--}}
+{{--        <div class="form-inline">--}}
+{{--            <div class="input-group" data-widget="sidebar-search">--}}
+{{--            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">--}}
+{{--            <div class="input-group-append">--}}
+{{--                <button class="btn btn-sidebar">--}}
+{{--                <i class="fas fa-search fa-fw"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        @endif--}}
 
-        @include('admin.layouts.inc.sidebar-menu.example')
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column js-activeable" data-widget="treeview" role="menu">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.authors.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Автори</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.pictures.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-image"></i>
+                            <p>Картини</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.pages.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>Сторінки</p>
+                        </a>
+                    </li>
 
+                </ul>
+            </nav>
     </div>
     <!-- /.sidebar -->
   </aside>

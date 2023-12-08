@@ -4,12 +4,12 @@ return [
     /*
      * HTML Logo
      */
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Art</b>Gallery',
 
     /*
      * Dashboard Home
      */
-    'dashboard_slug' => 'lte3',
+    'dashboard_slug' => 'admin',
 
     'routes' => true,
 
