@@ -57,7 +57,7 @@
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle">0</span>
+                            <span class="badge text-secondary border border-secondary rounded-circle js-cart-count">0</span>
                         </a>
                     </div>
                 </div>
