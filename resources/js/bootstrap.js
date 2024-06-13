@@ -4,7 +4,11 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+import jQuery from 'jquery';
+
 import axios from 'axios';
+
+window.$ = jQuery;
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -30,3 +34,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+

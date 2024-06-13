@@ -1528,7 +1528,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -7711,7 +7711,7 @@ function injectCSS(rootNode, css) {
 		expando.containsStyles = true;
 		css = '/* Chart.js */\n' + css;
 		var style = document.createElement('style');
-		style.setAttribute('type', 'text/css');
+		style.setAttribute('type', 'text/scss');
 		style.appendChild(document.createTextNode(css));
 		rootNode.appendChild(style);
 	}

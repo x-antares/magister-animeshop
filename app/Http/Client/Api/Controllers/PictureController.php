@@ -18,7 +18,9 @@ class PictureController extends Controller
      */
     public function index(Request $request)
     {
-        $pictures = Picture::with('media');
+        $pictures = Picture::when($val = request('search'), function ($q) use ($val) {
+            return $q->where('name', $val);
+        })->with('media', 'author');
 
         return PictureResource::collection($pictures->paginate());
     }

@@ -252,7 +252,7 @@
     strong: s,
     style: {
       attrs: {
-        type: ["text/css"],
+        type: ["text/scss"],
         media: media,
         scoped: null
       }

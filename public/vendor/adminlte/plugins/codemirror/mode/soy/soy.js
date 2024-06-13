@@ -66,7 +66,7 @@
       text: textMode,
       uri: textMode,
       trusted_resource_uri: textMode,
-      css: CodeMirror.getMode(config, "text/css"),
+      css: CodeMirror.getMode(config, "text/scss"),
       js: CodeMirror.getMode(config, {name: "text/javascript", statementIndent: 2 * config.indentUnit})
     };
 

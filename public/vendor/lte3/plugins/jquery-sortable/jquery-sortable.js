@@ -51,22 +51,22 @@
     // been appended to.
     afterMove: function ($placeholder, container, $closestItemOrContainer) {
     },
-    // The exact css path between the container and its items, e.g. "> tbody"
+    // The exact scss path between the container and its items, e.g. "> tbody"
     containerPath: "",
-    // The css selector of the containers
+    // The scss selector of the containers
     containerSelector: "ol, ul",
     // Distance the mouse has to travel to start dragging
     distance: 0,
     // Time in milliseconds after mousedown until dragging should start.
     // This option can be used to prevent unwanted drags when clicking on an element.
     delay: 0,
-    // The css selector of the drag handle
+    // The scss selector of the drag handle
     handle: "",
-    // The exact css path between the item and its subcontainers.
+    // The exact scss path between the item and its subcontainers.
     // It should only match the immediate items of a container.
     // No item of a subcontainer should be matched. E.g. for ol>div>li the itemPath is "> div"
     itemPath: "",
-    // The css selector of the items
+    // The scss selector of the items
     itemSelector: "li",
     // The class given to "body" while an item is being dragged
     bodyClass: "dragging",

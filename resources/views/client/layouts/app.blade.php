@@ -1,0 +1,7 @@
+@include('client.layouts.inc.begin')
+@include('client.layouts.inc.head')
+@include('client.layouts.inc.topbar')
+@include('client.layouts.inc.navbar')
+@yield('content')
+@include('client.layouts.inc.footer')
+@include('client.layouts.inc.end')

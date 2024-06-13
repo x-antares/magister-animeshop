@@ -2,8 +2,10 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Models\Author;
-use App\Models\Picture;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\Product;
 
 class AdminController extends Controller
 {
@@ -11,8 +13,10 @@ class AdminController extends Controller
     {
         return view('admin.admin', [
             'total' => [
-                'authors' => Author::count(),
-                'pictures' => Picture::count(),
+                'categories' => Category::count(),
+                'brands' => Brand::count(),
+                'products' => Product::count(),
+                'orders' => Order::count(),
             ],
         ]);
     }

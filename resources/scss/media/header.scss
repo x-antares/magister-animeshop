@@ -1,0 +1,15 @@
+@media (max-width: 991px) {
+    .header{
+        &-menu {
+
+            &__navbar {
+                padding: 20px 0px !important;
+                margin: 0px;
+
+                .navbar-collapse{
+                    margin-top: 1.6rem;
+                }
+            }
+        }
+    }
+}

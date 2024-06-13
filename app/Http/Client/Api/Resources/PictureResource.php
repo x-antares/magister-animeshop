@@ -19,6 +19,9 @@ class PictureResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'body' => $this->body,
+            'media' => [
+                'url' => 'https://picsum.photos/200/300',
+            ],
             'author' => $this->whenLoaded('author', fn() => AuthorResource::make($this->author)),
         ];
     }

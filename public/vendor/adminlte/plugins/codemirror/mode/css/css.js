@@ -13,7 +13,7 @@
 
 CodeMirror.defineMode("css", function(config, parserConfig) {
   var inline = parserConfig.inline
-  if (!parserConfig.propertyKeywords) parserConfig = CodeMirror.resolveMode("text/css");
+  if (!parserConfig.propertyKeywords) parserConfig = CodeMirror.resolveMode("text/scss");
 
   var indentUnit = config.indentUnit,
       tokenHooks = parserConfig.tokenHooks,
@@ -738,7 +738,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     return ["comment", "comment"];
   }
 
-  CodeMirror.defineMIME("text/css", {
+  CodeMirror.defineMIME("text/scss", {
     documentTypes: documentTypes,
     mediaTypes: mediaTypes,
     mediaFeatures: mediaFeatures,

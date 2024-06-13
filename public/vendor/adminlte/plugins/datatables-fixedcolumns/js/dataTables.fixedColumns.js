@@ -175,7 +175,7 @@
                             .css(this._getCellCSS(false, distLeft, 'left'))
                             .addClass(this.classes.fixedLeft);
                     }
-                    // Add the css for the header and the footer
+                    // Add the scss for the header and the footer
                     colHeader
                         .css(this._getCellCSS(true, distLeft, 'left'))
                         .addClass(this.classes.fixedLeft);
@@ -188,7 +188,7 @@
                     for (var _a = 0, rows_2 = rows; _a < rows_2.length; _a++) {
                         var row = rows_2[_a];
                         var cell = $($(row).children()[i - invisibles]);
-                        // If the cell is trying to fix to the left, remove the class and the css
+                        // If the cell is trying to fix to the left, remove the class and the scss
                         if (cell.hasClass(this.classes.fixedLeft)) {
                             cell
                                 .css(this._clearCellCSS('left'))
@@ -259,7 +259,7 @@
                             .css(this._getCellCSS(false, distRight, 'right'))
                             .addClass(this.classes.fixedRight);
                     }
-                    // Add the css for the header and the footer
+                    // Add the scss for the header and the footer
                     colHeader
                         .css(this._getCellCSS(true, distRight, 'right'))
                         .addClass(this.classes.fixedRight);
@@ -272,7 +272,7 @@
                     for (var _c = 0, rows_4 = rows; _c < rows_4.length; _c++) {
                         var row = rows_4[_c];
                         var cell = $($(row).children()[i + invisibles]);
-                        // If the cell is trying to fix to the right, remove the class and the css
+                        // If the cell is trying to fix to the right, remove the class and the scss
                         if (cell.hasClass(this.classes.fixedRight)) {
                             cell
                                 .css(this._clearCellCSS('right'))
@@ -322,7 +322,7 @@
          * @param header Whether this cell is a header or a footer
          * @param dist The distance that the cell should be moved away from the edge
          * @param lr Indicator of fixing to the left or the right
-         * @returns An object containing the correct css
+         * @returns An object containing the correct scss
          */
         FixedColumns.prototype._getCellCSS = function (header, dist, lr) {
             if (lr === 'left') {
@@ -349,10 +349,10 @@
             }
         };
         /**
-         * Gets the css that is required to clear the fixing to a side
+         * Gets the scss that is required to clear the fixing to a side
          *
          * @param lr Indicator of fixing to the left or the right
-         * @returns An object containing the correct css
+         * @returns An object containing the correct scss
          */
         FixedColumns.prototype._clearCellCSS = function (lr) {
             if (lr === 'left') {

@@ -1,0 +1,29 @@
+.footer{
+
+    &-container{
+
+    }
+
+    &-newsletter{
+
+        &__form{
+
+        }
+        &__input-group{
+
+        }
+        &__input{
+            padding: 24px 10px;
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+            width: 100%;
+        }
+        &__button-box{
+
+        }
+        &__button{
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+    }
+}

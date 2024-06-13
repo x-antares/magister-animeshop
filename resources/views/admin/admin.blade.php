@@ -12,14 +12,14 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $total['authors'] ?? 0 }}</h3>
+                            <h3>{{ $total['categories'] ?? 0 }}</h3>
 
-                            <p>Автори</p>
+                            <p>Категорії</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-list"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Більше <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.categories.index') }}" class="small-box-footer">Більше <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -28,14 +28,46 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $total['pictures'] ?? 0 }}</h3>
+                            <h3>{{ $total['brands'] ?? 0 }}</h3>
 
-                            <p>Картини</p>
+                            <p>Бренди</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-image"></i>
+                            <i class="fas fa-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Більше <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.brands.index') }}" class="small-box-footer">Більше <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $total['products'] ?? 0 }}</h3>
+
+                            <p>Товари</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                        <a href="{{ route('admin.products.index') }}" class="small-box-footer">Більше <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $total['orders'] ?? 0 }}</h3>
+
+                            <p>Замовлення</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                        <a href="{{ route('admin.orders.index') }}" class="small-box-footer">Більше <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

@@ -39,14 +39,26 @@
                 <ul class="nav nav-pills nav-sidebar flex-column js-activeable" data-widget="treeview" role="menu">
                     <li class="nav-item">
                         <a href="{{ route('admin.authors.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Автори</p>
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>Категорії</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.pictures.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-image"></i>
-                            <p>Картини</p>
+                        <a href="{{ route('admin.brands.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-bars"></i>
+                            <p>Бренди</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.products.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-shopping-cart"></i>
+                            <p>Товари</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.orders.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-check-circle"></i>
+                            <p>Замовлення</p>
                         </a>
                     </li>
                     <li class="nav-item">
