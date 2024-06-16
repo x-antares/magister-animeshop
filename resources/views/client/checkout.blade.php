@@ -55,6 +55,12 @@
                         <label>ZIP Code</label>
                         <input class="form-control" type="text" placeholder="123">
                     </div>
+                    <div class="col-md-6 form-group">
+                        <label>Comment</label>
+                        <textarea class="form-control" rows="8" id="message" placeholder="Message"
+                                  required="required"
+                                  data-validation-required-message="Please enter your message"></textarea>
+                    </div>
                     <div class="col-md-12 form-group">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="newaccount">
@@ -117,6 +123,18 @@
                         <div class="col-md-6 form-group">
                             <label>ZIP Code</label>
                             <input class="form-control" type="text" placeholder="123">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Comment</label>
+                            <textarea class="form-control" rows="8" id="message" placeholder="Message"
+                                      required="required"
+                                      data-validation-required-message="Please enter your message"></textarea>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control" rows="8" id="message" placeholder="Message"
+                                      required="required"
+                                      data-validation-required-message="Please enter your message"></textarea>
+                            <p class="help-block text-danger"></p>
                         </div>
                     </div>
                 </div>

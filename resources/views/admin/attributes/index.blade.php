@@ -2,19 +2,19 @@
 
 @section('content')
     @include('admin.parts.content-header', [
-        'page_title' => 'Категорії',
+        'page_title' => 'Атрибути товару',
         'url_back' => '/admin',
     ])
 
     <section class="content">
         <div class="mb-4">
-            <a href="#" class="btn btn-success btn-flat js-modal-fill-html" data-target='#modal-lg' data-fn-inits="initSelect2" data-url="{{ route('admin.categories.create') }}" ><i class="fa fa-plus"></i> Додати</a>
+            <a href="#" class="btn btn-success btn-flat js-modal-fill-html" data-target='#modal-lg' data-fn-inits="initSelect2" data-url="{{ route('admin.attributes.create') }}" ><i class="fa fa-plus"></i> Додати</a>
         </div>
 
             <!-- LIST/TABLE -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">К-сть: {{ $categories->count() }} </h3>
+                <h3 class="card-title">К-сть: {{ $attributes->count() }} </h3>
             </div>
 
             <div class="card-body table-responsive p-0">
@@ -27,17 +27,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($categories as $category)
+                        @foreach($attributes as $attribute)
                             <tr>
                                 <td>
-                                    {{ $category->name }}
+                                    {{ $attribute->name }}
                                 </td>
                                 <td>
-                                    {{ $category->created_at }}
+                                    {{ $attribute->created_at }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.categories.edit', $category) }}"  class="btn btn-info btn-sm js-modal-fill-html" data-target="#modal-lg" data-fn-inits="initSelect2"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('admin.categories.destroy', $category) }}" class="btn btn-danger btn-sm js-click-submit"
+                                    <a href="{{ route('admin.attributes.edit', $attribute) }}"  class="btn btn-info btn-sm js-modal-fill-html" data-target="#modal-lg" data-fn-inits="initSelect2"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{ route('admin.attributes.destroy', $attribute) }}" class="btn btn-danger btn-sm js-click-submit"
                                        data-method="delete"
                                        data-confirm="Confirm?"><i class="fas fa-trash"></i></a>
                                 </td>
@@ -47,7 +47,7 @@
                 </table>
             </div>
             <div class="card-footer clearfix">
-                {!! Lte3::pagination($categories ?? null) !!}
+                {!! Lte3::pagination($attributes ?? null) !!}
             </div>
         </div>
     </section>

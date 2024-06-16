@@ -9,6 +9,8 @@ use Fomvasss\MediaLibraryExtension\HasMedia\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model implements HasMedia
 {
@@ -26,7 +28,7 @@ class Product extends Model implements HasMedia
         'in_stock' => 'boolean',
     ];
 
-    protected array $mediaSingleCollections = ['image'];
+    protected array $mediaMultipleCollections = ['images'];
 
     /**
      * @return BelongsTo
@@ -52,5 +54,57 @@ class Product extends Model implements HasMedia
     public function getFormattedPrice(): string
     {
         return '$' . \number_format($this->price, 2, '.', ',');
+    }
+
+    /**
+     * @param Builder $builder
+     * @param array $attrs
+     * @param array $default
+     */
+    public function scopeFilterable(Builder $builder, array $attrs = [], array $default = [])
+    {
+        $attrs = ($attrs ?: request()->all()) + $default;
+
+        $builder->when($value = Arr::get($attrs, 'search'), fn ($b) =>
+            $b->where('name', 'like', '%' . $value . '%')
+                ->orWhereHas('brand', function ($q) use ($value) {
+                    $q->where('name', 'like', '%' . $value . '%');
+                })
+                ->orWhereHas('category', function ($q) use ($value) {
+                    $q->where('name', 'like', '%' . $value . '%');
+                })
+        );
+
+        $builder->when($value = Arr::get($attrs, 'filter.brands'), fn ($b) =>
+            $b->whereHas('brand', function ($q) use ($value) {
+                $q->whereIn('id', $value);
+            })
+        );
+
+        $builder->when($value = Arr::get($attrs, 'filter.categories'), fn ($b) =>
+            $b->whereHas('category', function ($q) use ($value) {
+                $q->whereIn('id', $value);
+            })
+        );
+
+        if (($min_price = Arr::get($attrs, 'filter.min_price')) && ($max_price = Arr::get($attrs, 'filter.max_price'))) {
+            $builder->whereBetween('price', [$min_price, $max_price]);
+        }
+
+        // Sort
+        if ($sort = Arr::get($attrs, 'sort')) {
+            $order = Arr::get($attrs, 'order');
+            $order = in_array($order, ['asc', 'desc']) ? $order : 'asc';
+            if (in_array($sort, ['name', 'created_at'])) {
+                $builder->orderBy($sort, $order);
+            } else {
+                $builder->latest('created_at');
+            }
+        } else {
+            $builder->latest('created_at');
+        }
+
+        $val = Arr::get($attrs, 'limit') ?: Arr::get($default, 'limit');
+        $builder->when($val, fn($b) => $b->limit($val));
     }
 }

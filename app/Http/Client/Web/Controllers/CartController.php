@@ -3,12 +3,31 @@
 namespace App\Http\Client\Web\Controllers;
 
 use App\Models\Cart;
-use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function view(Request $request)
+    {
+        /** @var Cart $cart */
+        $cart = Cart::find($request->cookie('uuid'));
+        $cartProducts = $cart->getAllProducts();
+
+        return view('client.cart', compact('cartProducts'));
+    }
+
+    public function getAllCartProducts(Request $request)
+    {
+        /** @var Cart $cart */
+        $cart = Cart::find($request->cookie('uuid'));
+
+        return response()->json([
+            'products' => $cart->getAllProducts(),
+        ]);
+    }
+
     public function updateCart(Request $request)
     {
 //        $test = [
@@ -20,7 +39,7 @@ class CartController extends Controller
 //            [
 //                'id' => '0f152bc1-ac93-43c6-9d49-061ed4087f4f',
 //                'is_deleted' => 0,
-//                'qty' => 3,
+//                'qty' => 1,
 //            ],
 //            [
 //                'id' => 'bb054c56-c722-4600-8981-ec7040d8fa05',
@@ -84,5 +103,41 @@ class CartController extends Controller
         $cart->save();
 
         return redirect()->route('products.index')->with('success', 'Product added to cart successfully!');
+    }
+
+    public function viewCheckout(Request $request)
+    {
+        /** @var Cart $cart */
+        $cart = Cart::find($request->cookie('uuid'));
+
+        if ($cart) {
+            $cartProducts = $cart->getAllProducts();
+            $shippingPrice = config('services.shipping_price');
+
+            $data = [
+                'shipping_price' => $shippingPrice,
+                'cartProducts' => $cartProducts,
+                'total' => $cart->total + $shippingPrice,
+                'sub_total' => $cart->total,
+            ];
+
+            return view('client.checkout', $data ?? []);
+        }
+
+//        abort(404);
+        return view('client.checkout', $data ?? []);
+
+    }
+
+    public function checkout(Request $request)
+    {
+        /** @var Cart $cart */
+        $cart = Cart::find($request->cookie('uuid'));
+
+        $order = Order::create();
+
+        foreach ($cart->getAllProducts() as $product) {
+            $order->purchaseProducts()->create($product);
+        }
     }
 }

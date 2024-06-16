@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('total', 10, 2)->default(0);
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('status')->nullable();
             $table->string('address')->nullable();
             $table->json('added')->nullable();
             $table->timestamps();

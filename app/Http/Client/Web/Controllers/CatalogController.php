@@ -9,29 +9,11 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
-    public function view(Category $category, Request $request)
+    public function view(Request $request)
     {
-        $query = Product::query();
+        $products = Product::filterable();
 
-        $query->where('category_id', $category->id);
-
-        if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->get('search') . '%');
-        }
-
-        $products = $query->paginate(12);
-        return view('client.catalog', ['products' => $products]);
+        return view('client.catalog', ['products' => $products->paginate(12)]);
     }
 
-//    public function update(Category $category, Request $request)
-//    {
-//        $data = $request->only('data');
-//
-//        if ()
-//    }
-
-    public function removeFromCart(Request $request)
-    {
-
-    }
 }

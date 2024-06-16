@@ -12,8 +12,16 @@
     'required' => true,
 ]) !!}
 
+{!! Lte3::select2('attribute_id', isset($product) ? $product->valueable?->attribute_id : null, \App\Models\Attribute::all()->pluck('name', 'id')->toArray(), [
+    'label' => 'Атрибут',
+    'required' => true,
+]) !!}
 
-{{--{!! Lte3::text('slug', null, ['label' => 'Slug', 'required' => true, 'default' => '']) !!}--}}
+{!! Lte3::select2('value_id', isset($product) ? $product->valueable?->attribute?->id : null, \App\Models\Value::all()->pluck('name', 'id')->toArray(), [
+    'label' => 'Значення атрибуту',
+    'required' => true,
+    'help' => '* Здавати відповідно до того як додано в атрибути товару'
+]) !!}
 
 {!! Lte3::textarea('body', null, [
        'label' => 'Контент',
@@ -29,8 +37,10 @@
 
 {!! Lte3::checkbox('is_featured', null, ['label' => 'Обраний', 'class_wrap' => 'icheck-primary']) !!}
 
+{!! Lte3::checkbox('is_published', null, ['label' => 'Публікувати', 'class_wrap' => 'icheck-primary']) !!}
 
-{!! Lte3::mediaFile('image', $product ?? null, [
+{!! Lte3::mediaFile('images', $product ?? null, [
         'is_image' => true,
+        'multiple' => true,
 ]) !!}
 

@@ -18,7 +18,7 @@ class HomeController extends Controller
             ->get();
 
         $featuredProducts = Product::with([/*'reviews', */'media'])
-//            ->where('is_featured', 1) // for featured products
+            ->where('is_featured', 1) // for featured products
             ->take(8)
             ->get();
 

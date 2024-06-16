@@ -2,7 +2,7 @@
 
 @section('content')
     @include('admin.parts.content-header', [
-        'page_title' => 'Продукту',
+        'page_title' => 'Товари',
         'url_back' => '/admin',
     ])
 
@@ -24,6 +24,7 @@
                         <th>Ім'я</th>
                         <th>Категорія</th>
                         <th>Бренд</th>
+                        <th>Опубліковані</th>
                         <th>Дата створення</th>
                         <th></th>
                     </tr>
@@ -39,6 +40,9 @@
                             </td>
                             <td>
                                 {{ $product->brand?->name }}
+                            </td>
+                            <td>
+                                <h3 class="card-title"><i class='fa fa-{{ $product->is_published ? 'check' : 'minus' }}'></i></h3>
                             </td>
                             <td>
                                 {{ $product->created_at }}

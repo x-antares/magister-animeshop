@@ -10,7 +10,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('is_main', 1)->paginate(10);
+
         return view('admin.categories.index', ['categories' => $categories]);
     }
 
@@ -30,7 +31,12 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $category = Category::create($request->only('name', /*'slug'*/));
+        $category = Category::create($request->only('name'));
+
+        foreach ($request->subCategories ?? [] as $subCategoryName) {
+            Category::firstOrCreate(['name' => $subCategoryName, 'parent_id' => $category->id]);
+        }
+
         $category->mediaManage($request);
 
         return redirect()->back();
@@ -38,7 +44,13 @@ class CategoryController extends Controller
 
     public function update(Category $category, Request $request)
     {
-        $category->update($request->only('name', /*'slug'*/));
+        $category->update($request->only('name'));
+        $category->childs()->delete();
+
+        foreach ($request->subCategories ?? [] as $subCategoryName) {
+            Category::firstOrCreate(['name' => $subCategoryName, 'parent_id' => $category->id]);
+        }
+
         $category->mediaManage($request);
 
         return redirect()->back();
@@ -46,7 +58,15 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $category->childs()->delete();
         $category->delete();
+
         return redirect()->back();
+    }
+
+    public function suggestCategory()
+    {
+        return response()->json([
+        ]);
     }
 }

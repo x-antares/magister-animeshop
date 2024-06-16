@@ -50,6 +50,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.attributes.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>Атрибути товару</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.products.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-shopping-cart"></i>
                             <p>Товари</p>
@@ -61,12 +67,7 @@
                             <p>Замовлення</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.pages.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-file-alt"></i>
-                            <p>Сторінки</p>
-                        </a>
-                    </li>
+
 
                 </ul>
             </nav>

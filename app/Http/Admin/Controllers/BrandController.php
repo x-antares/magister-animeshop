@@ -10,7 +10,8 @@ class BrandController extends Controller
 {
     public function index()
     {
-        $brands = Brand::all();
+        $brands = Brand::paginate(10);
+
         return view('admin.brands.index', ['brands' => $brands]);
     }
 
@@ -30,14 +31,16 @@ class BrandController extends Controller
 
     public function store(Request $request)
     {
-        Brand::create($request->only('name', 'slug'));
+        $brand = Brand::create($request->only('name'));
+        $brand->mediaManage($request);
 
         return redirect()->back();
     }
 
     public function update(Brand $brand, Request $request)
     {
-        $brand->update($request->only('name', 'slug'));
+        $brand->update($request->only('name'));
+        $brand->mediaManage($request);
 
         return redirect()->back();
     }

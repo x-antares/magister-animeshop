@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('qty')->default(0);
             $table->tinyInteger('in_stock')->default(0);
             $table->tinyInteger('is_featured')->default(0);
+            $table->tinyInteger('is_published')->default(0);
             $table->string('name')->index()->nullable();
             $table->text('short_description')->nullable();
             $table->text('body')->nullable();

@@ -3,13 +3,14 @@
 namespace App\Http\Admin\Controllers;
 
 use App\Models\Product;
+use App\Models\Value;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
         return view('admin.products.index', ['products' => $products]);
     }
 
@@ -29,7 +30,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $product = Product::create($request->only('name', 'author_id', 'is_featured', 'short_description', 'body', 'price'));
+        $product = Product::create($request->only('name', 'category_id', 'brand_id', 'body', 'short_description', 'price', 'is_featured', 'is_published'));
         $product->mediaManage($request);
 
         return redirect()->back();
@@ -37,8 +38,12 @@ class ProductController extends Controller
 
     public function update(Product $product, Request $request)
     {
-        $product->update($request->only('name', 'author_id', 'is_featured', 'short_description', 'body', 'price'));
+        dd($request->all());
+
+        $product->update($request->only('name', 'category_id', 'brand_id', 'body', 'short_description', 'price', 'is_featured', 'is_published'));
         $product->mediaManage($request);
+
+        $value = Value::where('attribute_id', $request->attribute_id)->where('id', $request->value_id)->first();
 
         return redirect()->back();
     }
@@ -46,6 +51,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
         return redirect()->back();
     }
 

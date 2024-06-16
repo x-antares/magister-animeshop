@@ -37,10 +37,6 @@ trait HasSearchableProductTrait
      */
     public function getAllProducts(): mixed
     {
-        if (isset($this->added['products'])) {
-            return $this->added['products'];
-        }
-
-        return [];
+        return $this->added['products'] ?? [];
     }
 }

@@ -1,10 +1,10 @@
-<div class="modal-header"><h4 class="modal-title">Редагувати</h4>
+<div class="modal-header"><h4 class="modal-title">Додати</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
     </button>
 </div>
-{!! Lte3::formOpen(['action' => route('admin.orders.update', $order), 'model' => $order, 'method' => 'PATCH']) !!}
+{!! Lte3::formOpen(['action' => route('admin.attributes.store')]) !!}
 <div class="modal-body">
-    @include('admin.orders.form', ['order' => $order])
+    @include('admin.attributes.form')
 </div>
 <div class="modal-footer justify-content-between">
     <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>

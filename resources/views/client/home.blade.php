@@ -103,7 +103,7 @@
 
     @include('client.common.star-products', ['featuredProducts' => $data['featuredProducts']])
 
-    <!-- Vendor Start -->
+{{--    <!-- Vendor Start -->--}}
     <div class="container-fluid py-5">
         <div class="row px-xl-5">
             <div class="col">
@@ -136,7 +136,7 @@
             </div>
         </div>
     </div>
-    <!-- Vendor End -->
+{{--    <!-- Vendor End -->--}}
 
 
 @endsection

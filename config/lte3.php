@@ -4,7 +4,7 @@ return [
     /*
      * HTML Logo
      */
-    'logo' => '<b>Art</b>Gallery',
+    'logo' => '<b>Anime</b>Shop',
 
     /*
      * Dashboard Home

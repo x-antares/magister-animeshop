@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name')->index()->nullable();
             $table->tinyInteger('is_main')->default(0);
+            $table->tinyInteger('is_published')->default(0);
             $table->string('slug')->index()->nullable();
             $table->uuid('parent_id')->index()->nullable();
             $table->timestamps();
