@@ -19,9 +19,9 @@ use App\Http\Client\Web\Controllers\CartController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/cart/test', [CartController::class, 'view'])->name('client.cart');
+Route::get('/cart', [CartController::class, 'view'])->name('client.cart');
 
-Route::get('/cart', [CartController::class, 'getAllCartProducts'])->name('cart.index');
+Route::get('/ajax/cart', [CartController::class, 'getAllCartProducts'])->name('cart.index');
 
 Route::post('/ajax/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
 

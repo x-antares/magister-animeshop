@@ -67,7 +67,7 @@ document.querySelectorAll('.js-main-add-to-cart').forEach(item => {
     })
 })
 
-window.axios.get('/cart').then(response => {
+window.axios.get('/ajax/cart').then(response => {
     const cart = new Cart(response.data.products);
 
     cart$.feed(cart);
