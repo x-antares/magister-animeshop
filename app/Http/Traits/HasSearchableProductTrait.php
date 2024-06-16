@@ -39,4 +39,24 @@ trait HasSearchableProductTrait
     {
         return $this->added['products'] ?? [];
     }
+
+    /**
+     * Get all products from cart
+     *
+     * @return mixed
+     */
+    public function getCalcCartTotal(): mixed
+    {
+        $total = 0;
+
+        foreach ($this->added ?? [] as $key => $item) {
+            if ($key === 'products') {
+                foreach ($item as $product) {
+                    $total += $product['price'] * $product['quantity'];
+                }
+            }
+        }
+
+        return $total;
+    }
 }

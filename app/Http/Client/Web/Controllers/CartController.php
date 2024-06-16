@@ -14,8 +14,11 @@ class CartController extends Controller
         /** @var Cart $cart */
         $cart = Cart::find($request->session()->get('cartId'));
         $cartProducts = $cart->getAllProducts();
+        $subTotal = $cart->total;
+        $shippingPrice = config('services.shipping_price');
+        $total = $subTotal + $shippingPrice;
 
-        return view('client.cart', compact('cartProducts'));
+        return view('client.cart', compact('cartProducts', 'subTotal', 'shippingPrice', 'total'));
     }
 
     public function getAllCartProducts(Request $request)
@@ -34,17 +37,17 @@ class CartController extends Controller
 ////            [
 ////                'id' => '0eb673c4-40b7-49da-bafc-141c835d4460',
 ////                'is_deleted' => 1,
-////                'qty' => 3,
+////                'quantity' => 3,
 ////            ],
 //            [
 //                'id' => '0f152bc1-ac93-43c6-9d49-061ed4087f4f',
 //                'is_deleted' => 0,
-//                'qty' => 1,
+//                'quantity' => 1,
 //            ],
 //            [
 //                'id' => 'bb054c56-c722-4600-8981-ec7040d8fa05',
 //                'is_deleted' => 0,
-//                'qty' => 3,
+//                'quantity' => 3,
 //            ]
 //        ];
 
@@ -72,6 +75,7 @@ class CartController extends Controller
                         if ($product['quantity'] > $item['quantity']) {
                             $updQty = $productData['quantity'] - $item['quantity'];
                             $cartProducts[$key]['quantity'] = $updQty;
+                            $cartProducts[$key]['total'] = $updQty * $product['price'];
                         }
 
                         // логіка видалення всього товару
@@ -84,6 +88,7 @@ class CartController extends Controller
                     if (!$item['is_deleted'] && $productData) {
                         $updQty = $productData['quantity'] + $item['quantity'];
                         $cartProducts[$key]['quantity'] = $updQty;
+                        $cartProducts[$key]['total'] = $updQty * $product['price'];
                     }
 
                 }
@@ -93,6 +98,7 @@ class CartController extends Controller
             if (!$item['is_deleted'] && !$productData) {
                 $product = Product::find($item['id'])->only('id', 'quantity', 'name', 'price');
                 $product['quantity'] = $item['quantity'];
+                $product['total'] = $item['quantity'] * $product['price'];
 
                 $newCartProducts[] = $product;
             }
@@ -100,6 +106,7 @@ class CartController extends Controller
 
         $cartProducts = array_merge($cartProducts ?? [], $newCartProducts);
         $cart->setAttribute('added->products', $cartProducts);
+        $cart->setAttribute('total', $cart->getCalcCartTotal());
         $cart->save();
 
         return response()->json(['message' => 'Продукт успішно доданий!']);
