@@ -11,10 +11,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Cart extends Model
 {
     use HasFactory,
-        HasUuidTrait,
         HasSearchableProductTrait;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['id'];
 
     protected $casts = [
         'total' => 'float',

@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cart;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class SetCartUuid
@@ -19,12 +19,14 @@ class SetCartUuid
      */
     public function handle(Request $request, Closure $next): Response
     {
-//        if($request->hasSession('cartUuid')) {
-//            return $next($request);
-//        }
+        if($request->session()->get('cartId')) {
+            return $next($request);
+        }
 
         $uuid = Str::uuid()->toString();
-        session()->put('cartuuid', 'test');
+        Cart::create(['id' => $uuid]);
+
+        $request->session()->put('cartId', $uuid);
 
         return $next($request);
     }

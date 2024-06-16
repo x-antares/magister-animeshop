@@ -12,7 +12,7 @@ class CartController extends Controller
     public function view(Request $request)
     {
         /** @var Cart $cart */
-        $cart = Cart::find($request->cookie('uuid'));
+        $cart = Cart::find($request->session()->get('cartId'));
         $cartProducts = $cart->getAllProducts();
 
         return view('client.cart', compact('cartProducts'));
@@ -21,7 +21,7 @@ class CartController extends Controller
     public function getAllCartProducts(Request $request)
     {
         /** @var Cart $cart */
-        $cart = Cart::find($request->cookie('uuid'));
+        $cart = Cart::find($request->session()->get('cartId'));
 
         return response()->json([
             'products' => $cart->getAllProducts(),
@@ -50,7 +50,7 @@ class CartController extends Controller
 
 
         /** @var Cart $cart */
-        $cart = Cart::firstOrCreate(['user_id' => $request->cookie('uuid')]);
+        $cart = Cart::find($request->session()->get('cartId'));
 
         $data = $request->data;
 
@@ -69,21 +69,21 @@ class CartController extends Controller
                     // логіка видалення
                     if ($item['is_deleted'] && ($item['id'] === $productId)) {
                         // логіка видалення певної к-сті товарів
-                        if ($product['qty'] > $item['qty']) {
-                            $updQty = $productData['qty'] - $item['qty'];
-                            $cartProducts[$key]['qty'] = $updQty;
+                        if ($product['quantity'] > $item['quantity']) {
+                            $updQty = $productData['quantity'] - $item['quantity'];
+                            $cartProducts[$key]['quantity'] = $updQty;
                         }
 
                         // логіка видалення всього товару
-                        if ($product['qty'] <= $item['qty']) {
+                        if ($product['quantity'] <= $item['quantity']) {
                            unset($cartProducts[$key]);
                         }
                     }
 
                     // логіка додавання к-сті існуючого товару в корзині
                     if (!$item['is_deleted'] && $productData) {
-                        $updQty = $productData['qty'] + $item['qty'];
-                        $cartProducts[$key]['qty'] = $updQty;
+                        $updQty = $productData['quantity'] + $item['quantity'];
+                        $cartProducts[$key]['quantity'] = $updQty;
                     }
 
                 }
@@ -91,8 +91,8 @@ class CartController extends Controller
 
             // логіка додавання товару
             if (!$item['is_deleted'] && !$productData) {
-                $product = Product::find($item['id'])->only('id', 'name', 'price');
-                $product['qty'] = $item['qty'];
+                $product = Product::find($item['id'])->only('id', 'quantity', 'name', 'price');
+                $product['quantity'] = $item['quantity'];
 
                 $newCartProducts[] = $product;
             }
@@ -102,13 +102,14 @@ class CartController extends Controller
         $cart->setAttribute('added->products', $cartProducts);
         $cart->save();
 
-        return redirect()->route('products.index')->with('success', 'Product added to cart successfully!');
+        return response()->json(['message' => 'Продукт успішно доданий!']);
+
     }
 
     public function viewCheckout(Request $request)
     {
         /** @var Cart $cart */
-        $cart = Cart::find($request->cookie('uuid'));
+        $cart = Cart::find($request->session()->get('cartId'));
 
         if ($cart) {
             $cartProducts = $cart->getAllProducts();
@@ -132,7 +133,7 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         /** @var Cart $cart */
-        $cart = Cart::find($request->cookie('uuid'));
+        $cart = Cart::find($request->session()->get('cartId'));
 
         $order = Order::create();
 

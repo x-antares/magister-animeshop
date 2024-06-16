@@ -38,8 +38,6 @@ class ProductController extends Controller
 
     public function update(Product $product, Request $request)
     {
-        dd($request->all());
-
         $product->update($request->only('name', 'category_id', 'brand_id', 'body', 'short_description', 'price', 'is_featured', 'is_published'));
         $product->mediaManage($request);
 
