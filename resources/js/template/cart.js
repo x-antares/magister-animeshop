@@ -16,10 +16,7 @@ class Cart {
                 quantity: quantity,
                 is_deleted: false
             }]
-        }).then(response => {
-            this.products = response.data.products;
-            cart$.feed(this);
-        })
+        });
     }
 
     remove(productId) {
@@ -29,10 +26,7 @@ class Cart {
                 quantity: 1,
                 is_deleted: true
             }]
-        }).then(response => {
-            this.products = response.data.products;
-            cart$.feed(this);
-        })
+        });
     }
 
     count() {
@@ -44,6 +38,12 @@ class Cart {
 
         return count;
     }
+
+    fetch () {
+        window.axios.get('/ajax/cart').then(response => {
+            this.products = response.data.products;
+        });
+    }
 }
 
 document.querySelectorAll('.js-simple-add-to-cart').forEach(item => {
@@ -53,6 +53,10 @@ document.querySelectorAll('.js-simple-add-to-cart').forEach(item => {
         const cart = cart$.current();
 
         cart.add(item.dataset.productId);
+
+        cart.fetch();
+
+        cart$.feed(cart);
     })
 })
 
@@ -64,15 +68,18 @@ document.querySelectorAll('.js-main-add-to-cart').forEach(item => {
         const choosenQuantityItem = item.parentNode.querySelector('.js-cart-product-quantity');
 
         cart.add(item.dataset.productId, choosenQuantityItem.value);
+
+        cart.fetch();
+
+        cart$.feed(cart);
     })
 })
 
-window.axios.get('/ajax/cart').then(response => {
-    const cart = new Cart(response.data.products);
+const cart = new Cart();
 
-    cart$.feed(cart);
-});
+cart.fetch();
 
+cart$.feed(cart);
 
 cart$.onLatest(cart => {
     document.querySelector('.js-cart-count').innerText = cart.count();
