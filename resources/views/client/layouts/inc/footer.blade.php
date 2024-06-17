@@ -19,18 +19,6 @@
                         <a class="text-secondary" href="{{ route('contact') }}"><i class="fa fa-angle-right mr-2"></i>Контакти</a>
                     </div>
                 </div>
-                <div class="footer-newsletter col-md-7 mb-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Отримуйте оновлення</h5>
-                    <p>Будьте у курсі подій першими! Підпишіться на наші оновлення.</p>
-                    <form class="footer-newsletter__form" action="">
-                        <div class="footer-newsletter__input-group input-group">
-                            <input type="email" class="footer-newsletter__input form-control" placeholder="Ваша елекронна адреса">
-                            <div class="footer-newsletter__button-box input-group-append">
-                                <button class="footer-newsletter__button btn btn-primary">Приєднатися</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>

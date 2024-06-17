@@ -32,8 +32,8 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceRootUrl(env('NGROK_URL', 'https://9677-31-128-77-179.ngrok-free.app'));
         }
 
-        view()->share('categories', Category::with('media')
-//            ->where('is_published', 1)
+        view()->share('categories', Category::with('media', 'childs')
+            ->where('is_main', 1)
             ->get()
         );
 

@@ -18,14 +18,27 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
-{{--                    <a href="" class="nav-item nav-link">Манга та манхва</a>--}}
-{{--                    <a href="" class="nav-item nav-link">Їжа та напої</a>--}}
-{{--                    <a href="" class="nav-item nav-link">Статуетки та фігурки</a>--}}
-{{--                    <a href="" class="nav-item nav-link">Товари для дому та офісу</a>--}}
-{{--                    <a href="" class="nav-item nav-link">Аксесуари</a>--}}
-{{--                    <a href="" class="nav-item nav-link">Ідеї для подарунків</a>--}}
+                    <a href="" class="nav-item nav-link">Манга та манхва</a>
+                    <a href="" class="nav-item nav-link">Їжа та напої</a>
+                    <a href="" class="nav-item nav-link">Статуетки та фігурки</a>
+                    <a href="" class="nav-item nav-link">Товари для дому та офісу</a>
+                    <a href="" class="nav-item nav-link">Аксесуари</a>
+                    <a href="" class="nav-item nav-link">Ідеї для подарунків</a>
                     @foreach($categories as $category)
+                        @if($category->childs->count() > 0)
+                            <div class="nav-item dropdown dropright">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ $category->name }} <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                <div class="dropdown-menu position-absolute border-0">
+                                    <div class="header-menu__dropdown-menu">
+                                        @foreach($category->childs ?? [] as $subcategory)
+                                            <a href="" class="dropdown-item">{{ $subcategory->name }}</a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @else
                             <a href="{{ $category->slug }}" class="nav-item nav-link">{{ $category->name }}</a>
+                        @endif
                     @endforeach
                 </div>
             </nav>
