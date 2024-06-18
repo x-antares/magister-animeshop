@@ -4,8 +4,12 @@
         <div class="col-12">
             <nav class="breadcrumbs-container breadcrumb bg-light mb-30">
                 <a class="breadcrumb-item text-dark" href="#">Головна</a>
-                <a class="breadcrumb-item text-dark" href="#">Покупки</a>
-                <span class="breadcrumb-item active">Корзина</span>
+                @if(isset($subpage))
+                    <a class="breadcrumb-item text-dark" href="#">{{ $subpage }}</a>
+                @endif
+                @if(isset($page))
+                    <span class="breadcrumb-item active">{{ $page }}</span>
+                @endif
             </nav>
         </div>
     </div>

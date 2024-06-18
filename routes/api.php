@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('pictures', [\App\Http\Client\Api\Controllers\PictureController::class, 'index']);
-Route::get('pictures/{picture:slug}', [\App\Http\Client\Api\Controllers\PictureController::class, 'show']);
 
 
 

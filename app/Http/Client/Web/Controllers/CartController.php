@@ -51,7 +51,6 @@ class CartController extends Controller
 //            ]
 //        ];
 
-
         /** @var Cart $cart */
         $cart = Cart::find($request->session()->get('cartId'));
 
@@ -132,9 +131,7 @@ class CartController extends Controller
             return view('client.checkout', $data ?? []);
         }
 
-//        abort(404);
         return view('client.checkout', $data ?? []);
-
     }
 
     public function checkout(Request $request)
@@ -142,7 +139,7 @@ class CartController extends Controller
         /** @var Cart $cart */
         $cart = Cart::find($request->session()->get('cartId'));
 
-        $order = Order::create();
+        $order = Order::create($request->only('name', 'email', 'phone', 'address', 'added'));
 
         foreach ($cart->getAllProducts() as $product) {
             $order->purchaseProducts()->create($product);
