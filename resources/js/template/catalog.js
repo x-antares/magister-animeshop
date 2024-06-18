@@ -47,9 +47,9 @@ class Catalog {
     async fetchUrl() {
         const { data } = await window.axios.post('/ajax/catalog/filters',  {
             filters: catalog.filters,
-                search: catalog.search,
-                sort: catalog.sortBy,
-                perPage: catalog.perPage
+            search: catalog.search,
+            sort: catalog.sortBy,
+            per_page: catalog.perPage
         });
 
         return data.url || null;
