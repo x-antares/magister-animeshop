@@ -5,12 +5,12 @@ export const cart$ = new DataQueue();
 class Cart {
     products;
 
-    constructor(products) {
-        this.products = products || [];
+    constructor(products = []) {
+        this.products = products;
     }
 
-    add(productId, quantity = 1) {
-        window.axios.post(`/ajax/cart/update`, {
+    async add(productId, quantity = 1) {
+        await window.axios.post(`/ajax/cart/update`, {
             data: [{
                 id: productId,
                 quantity: quantity,
@@ -19,8 +19,8 @@ class Cart {
         });
     }
 
-    remove(productId) {
-        window.axios.post(`/ajax/cart/update`, {
+    async remove(productId) {
+        await window.axios.post(`/ajax/cart/update`, {
             data: [{
                 id: productId,
                 quantity: 1,
@@ -39,48 +39,46 @@ class Cart {
         return count;
     }
 
-    fetch () {
-        window.axios.get('/ajax/cart').then(response => {
-            this.products = response.data.products;
-        });
+    async fetch () {
+        const { data } = await window.axios.get('/ajax/cart');
+
+        this.products = data.products;
     }
 }
 
 document.querySelectorAll('.js-simple-add-to-cart').forEach(item => {
-    item.addEventListener('click', event => {
+    item.addEventListener('click', async (event) => {
         event.preventDefault();
 
         const cart = cart$.current();
 
-        cart.add(item.dataset.productId);
+        await cart.add(item.dataset.productId);
 
-        cart.fetch();
+        await this.fetch();
 
-        cart$.feed(cart);
+        cart$.feed(this);
     })
 })
 
 
 document.querySelectorAll('.js-main-add-to-cart').forEach(item => {
-    item.addEventListener('click', event => {
+    item.addEventListener('click', async (event) => {
         const cart = cart$.current();
 
         const choosenQuantityItem = item.parentNode.querySelector('.js-cart-product-quantity');
 
-        cart.add(item.dataset.productId, choosenQuantityItem.value);
+        await cart.add(item.dataset.productId, choosenQuantityItem.value);
 
-        cart.fetch();
+        await this.fetch();
 
-        cart$.feed(cart);
+        cart$.feed(this);
     })
 })
-
-const cart = new Cart();
-
-cart.fetch();
-
-cart$.feed(cart);
 
 cart$.onLatest(cart => {
     document.querySelector('.js-cart-count').innerText = cart.count();
 })
+
+const cart = new Cart();
+
+cart.fetch().then(() => cart$.feed(cart));
