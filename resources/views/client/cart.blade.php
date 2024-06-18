@@ -5,7 +5,7 @@
 @include('client.layouts.inc.breadcrumbs')
 
     <!-- Cart Start -->
-<div class="container-fluid">
+<div class="container-fluid js-cart-page">
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">
             <table class="table table-light table-borderless table-hover text-center mb-0">
@@ -20,26 +20,26 @@
                 </thead>
                 <tbody class="align-middle">
                 @foreach($cartProducts as $product)
-                    <tr data-product-id="{{ $product['id'] }}">
+                    <tr data-product-id="{{ $product['id'] }}" class="js-cart-product">
                         <td class="align-middle"><img src="#" alt="" style="width: 50px;"> {{ $product['name'] }}</td>
-                        <td class="align-middle">${{ $product['price'] }}</td>
+                        <td class="align-middle js-cart-product-price">${{ $product['price'] }}</td>
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus" >
+                                    <button class="btn btn-sm btn-primary btn-minus js-cart-change-product-quantity">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{ $product['quantity'] }}">
+                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center js-cart-product-quantity" value="{{ $product['quantity'] }}">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
+                                    <button class="btn btn-sm btn-primary btn-plus js-cart-change-product-quantity">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
                         </td>
-                        <td class="align-middle">${{ $product['total'] }}</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                        <td class="align-middle js-cart-product-total">${{ $product['total'] }}</td>
+                        <td class="align-middle"><button class="btn btn-sm btn-danger js-cart-product-remove"><i class="fa fa-times"></i></button></td>
                     </tr>
                 @endforeach
 
@@ -136,7 +136,7 @@
                 <div class="border-bottom pb-2">
                     <div class="d-flex justify-content-between mb-3">
                         <h6>Загалом</h6>
-                        <h6>$750</h6>
+                        <h6 class="js-cart-original-total">$750</h6>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6 class="font-weight-medium">Доставка</h6>
@@ -146,7 +146,7 @@
                 <div class="pt-2">
                     <div class="d-flex justify-content-between mt-2">
                         <h5>До сплати</h5>
-                        <h5>$760</h5>
+                        <h5 class="js-cart-final-total">$760</h5>
                     </div>
                     <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Оформити замовлення</button>
                 </div>
