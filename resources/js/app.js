@@ -7,3 +7,5 @@ import './bootstrap';
 // import './template/lib/owlcarousel/owl.carousel';
 import './template/main';
 import './template/cart';
+import './template/catalog';
+import './template/search';

@@ -20,9 +20,9 @@
         <div class="header-search col-lg-4 col-6 text-left">
             <form action="{{--{{ route('catalog.index') }}--}}">
                 <div class="header-search__input-group input-group">
-                    <input type="text" class="header-search__input form-control" placeholder="Шукати...">
+                    <input type="text" class="header-search__input form-control js-global-search-input" placeholder="Шукати...">
                     <div class="input-group-append">
-                            <span class="header-search__input-group-append input-group-text bg-transparent text-primary">
+                            <span class="header-search__input-group-append input-group-text bg-transparent text-primary js-global-search-btn">
                                 <i class="fa fa-search"></i>
                             </span>
                     </div>

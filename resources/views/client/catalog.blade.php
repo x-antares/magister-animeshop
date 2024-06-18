@@ -56,27 +56,27 @@
 {{--                            <span class="badge border font-weight-normal">1000</span>--}}
 {{--                        </div>--}}
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-1">
+                            <input type="checkbox" class="custom-control-input js-filter-input" data-filter-value="TechCom" id="color-1">
                             <label class="custom-control-label" for="color-1">TechCom</label>
 {{--                            <span class="badge border font-weight-normal">150</span>--}}
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-2">
+                            <input type="checkbox" class="custom-control-input js-filter-input" data-filter-value="WORKAPPLY" id="color-2">
                             <label class="custom-control-label" for="color-2">WORKAPPLY</label>
 {{--                            <span class="badge border font-weight-normal">295</span>--}}
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-3">
+                            <input type="checkbox" class="custom-control-input js-filter-input" data-filter-value="DATAXCHANGE" id="color-3">
                             <label class="custom-control-label" for="color-3">DATAXCHANGE</label>
 {{--                            <span class="badge border font-weight-normal">246</span>--}}
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-4">
+                            <input type="checkbox" class="custom-control-input js-filter-input" data-filter-value="BluePhlare" id="color-4">
                             <label class="custom-control-label" for="color-4">BluePhlare</label>
 {{--                            <span class="badge border font-weight-normal">145</span>--}}
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="color-5">
+                            <input type="checkbox" class="custom-control-input js-filter-input" data-filter-value="FUZION SOURCE" id="color-5">
                             <label class="custom-control-label" for="color-5">FUZION SOURCE</label>
 {{--                            <span class="badge border font-weight-normal">168</span>--}}
                         </div>
@@ -86,7 +86,7 @@
 
                 <!-- Size Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">За категорією</span></h5>
-                <div class="bg-light p-4 mb-30">
+                <div class="bg-light p-4 mb-30 js-filter-attribute" data-filter-attribute="category">
                     <form>
 {{--                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">--}}
 {{--                            <input type="checkbox" class="custom-control-input" checked id="size-all">--}}

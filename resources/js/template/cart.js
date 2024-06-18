@@ -124,7 +124,7 @@ document.body.addEventListener(...delegate('click', '.js-cart-change-product-qua
     const value = productRow.querySelector('.js-cart-product-quantity').value;
 
     const cart = cart$.current();
-    await cart.add(productRow.dataset.productId, value);
+    await cart.change(productRow.dataset.productId, value);
     await cart.fetch();
     cart$.feed(cart);
 }));
