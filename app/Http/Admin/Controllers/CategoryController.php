@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $category = Category::create($request->only('name'));
+        $category = Category::create($request->only('name', 'is_main'));
 
         foreach ($request->subCategories ?? [] as $subCategoryName) {
             Category::firstOrCreate(['name' => $subCategoryName, 'parent_id' => $category->id]);
@@ -44,7 +44,7 @@ class CategoryController extends Controller
 
     public function update(Category $category, Request $request)
     {
-        $category->update($request->only('name'));
+        $category->update($request->only('name', 'is_main'));
         $category->childs()->delete();
 
         foreach ($request->subCategories ?? [] as $subCategoryName) {

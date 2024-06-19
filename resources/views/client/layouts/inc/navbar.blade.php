@@ -18,12 +18,12 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
-                    <a href="" class="nav-item nav-link">Манга та манхва</a>
-                    <a href="" class="nav-item nav-link">Їжа та напої</a>
-                    <a href="" class="nav-item nav-link">Статуетки та фігурки</a>
-                    <a href="" class="nav-item nav-link">Товари для дому та офісу</a>
-                    <a href="" class="nav-item nav-link">Аксесуари</a>
-                    <a href="" class="nav-item nav-link">Ідеї для подарунків</a>
+{{--                    <a href="" class="nav-item nav-link">Манга та манхва</a>--}}
+{{--                    <a href="" class="nav-item nav-link">Їжа та напої</a>--}}
+{{--                    <a href="" class="nav-item nav-link">Статуетки та фігурки</a>--}}
+{{--                    <a href="" class="nav-item nav-link">Товари для дому та офісу</a>--}}
+{{--                    <a href="" class="nav-item nav-link">Аксесуари</a>--}}
+{{--                    <a href="" class="nav-item nav-link">Ідеї для подарунків</a>--}}
                     @foreach($categories as $category)
                         @if($category->childs->count() > 0)
                             <div class="nav-item dropdown dropright">
@@ -55,7 +55,7 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="{{ route('home') }}" class="nav-item nav-link">Головна</a>
-                        <a href="{{ route('checkout') }}" class="nav-item nav-link">Покупки</a>
+{{--                        <a href="{{ route('checkout') }}" class="nav-item nav-link">Покупки</a>--}}
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Замовлення <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu border-0">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0 ml-3">
-                            <i class="fas fa-shopping-cart text-primary"></i>
+                            <a href="{{ route('client.cart') }}"><i class="fas fa-shopping-cart text-primary"></i></a>
                             <span class="badge text-secondary border border-secondary rounded-circle js-cart-count">0</span>
                         </a>
                     </div>

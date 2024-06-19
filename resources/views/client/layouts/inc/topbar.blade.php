@@ -12,7 +12,7 @@
     </div>
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="header-logo col-lg-4">
-            <a href="" class="text-decoration-none">
+            <a href="/" class="text-decoration-none">
                 <span class="header-logo__text header-logo__text--left h1 text-uppercase text-primary bg-dark px-2">Anime</span>
                 <span class="header-logo__text header-logo__text--right h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
             </a>

@@ -25,6 +25,8 @@ Route::get('/ajax/cart', [CartController::class, 'getAllCartProducts'])->name('c
 
 Route::post('/ajax/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
 
+Route::post('/ajax/cart/change', [CartController::class, 'changeCart'])->name('cart.change');
+
 Route::get('/product/{product:slug}', [ProductsController::class, 'view'])->name('product');
 
 Route::get('/catalog', [CatalogController::class, 'view']);

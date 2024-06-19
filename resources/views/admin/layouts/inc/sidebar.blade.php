@@ -49,12 +49,12 @@
                             <p>Бренди</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.attributes.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-file-alt"></i>
-                            <p>Атрибути товару</p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route('admin.attributes.index') }}" class="nav-link">--}}
+{{--                            <i class="nav-icon fas fa-file-alt"></i>--}}
+{{--                            <p>Атрибути товару</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <li class="nav-item">
                         <a href="{{ route('admin.products.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-shopping-cart"></i>

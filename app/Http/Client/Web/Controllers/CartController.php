@@ -81,23 +81,26 @@ class CartController extends Controller
                         if ($product['quantity'] <= $item['quantity']) {
                            unset($cartProducts[$key]);
                         }
+
+                        // логіка додавання к-сті існуючого товару в корзині
+                        if (!$item['is_deleted'] && $productData) {
+                            $updQty = $productData['quantity'] + $item['quantity'];
+                            $cartProducts[$key]['quantity'] = $updQty;
+                            $cartProducts[$key]['total'] = $updQty * $product['price'];
+                        }
                     }
 
-                    // логіка додавання к-сті існуючого товару в корзині
-                    if (!$item['is_deleted'] && $productData) {
-                        $updQty = $productData['quantity'] + $item['quantity'];
-                        $cartProducts[$key]['quantity'] = $updQty;
-                        $cartProducts[$key]['total'] = $updQty * $product['price'];
-                    }
 
                 }
             }
 
             // логіка додавання товару
             if (!$item['is_deleted'] && !$productData) {
-                $product = Product::find($item['id'])->only('id', 'quantity', 'name', 'price');
+                $productItem = Product::with('media')->find($item['id']);
+                $product = $productItem->only('id', 'quantity', 'name', 'price');
                 $product['quantity'] = $item['quantity'];
                 $product['total'] = $item['quantity'] * $product['price'];
+                $product['img'] = $productItem->getMyFirstMediaUrl('images');
 
                 $newCartProducts[] = $product;
             }
@@ -112,10 +115,49 @@ class CartController extends Controller
 
     }
 
+    public function changeCart(Request $request)
+    {
+        /** @var Cart $cart */
+        $cart = Cart::find($request->session()->get('cartId'));
+        $data = $request->data;
+
+        $cartProducts = $cart->getAllProducts();
+        $newCartProducts = [];
+
+        foreach ($data ?? [] as $item) {
+            $id = $item['id'];
+
+            $productData = $cart->getProductById($id);
+
+            if ($productData) {
+                foreach ($cartProducts as $key => $product) {
+                    $productId = $product['id'];
+
+                    // логіка зміни к-сті товару
+                    if ($item['id'] === $productId) {
+                            $cartProducts[$key]['quantity'] = $item['quantity'];
+                            $cartProducts[$key]['total'] = $item['quantity'] * $product['price'];
+                    }
+                }
+            }
+        }
+
+        $cartProducts = array_merge($cartProducts ?? [], $newCartProducts);
+        $cart->setAttribute('added->products', $cartProducts);
+        $cart->setAttribute('total', $cart->getCalcCartTotal());
+        $cart->save();
+
+        return response()->json(['message' => 'Продукт успішно доданий!']);
+    }
+
+
     public function viewCheckout(Request $request)
     {
         /** @var Cart $cart */
         $cart = Cart::find($request->session()->get('cartId'));
+
+        $data = $request->data;
+
 
         if ($cart) {
             $cartProducts = $cart->getAllProducts();
