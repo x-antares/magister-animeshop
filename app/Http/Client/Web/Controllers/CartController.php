@@ -28,6 +28,8 @@ class CartController extends Controller
 
         return response()->json([
             'products' => $cart->getAllProducts(),
+            'finalTotal' => $cart->total + config('services.shipping_price'),
+            'originalTotal' => $cart->total,
         ]);
     }
 

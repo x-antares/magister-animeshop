@@ -21,7 +21,7 @@
                 <tbody class="align-middle">
                 @foreach($cartProducts as $product)
                     <tr data-product-id="{{ $product['id'] }}" class="js-cart-product">
-                        <td class="align-middle"><img src="#" alt="" style="width: 50px;"> {{ $product['name'] }}</td>
+                        <td class="align-middle"><img src="{{ $product['img'] }}" alt="" style="width: 50px;"> {{ $product['name'] }}</td>
                         <td class="align-middle js-cart-product-price">${{ $product['price'] }}</td>
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
