@@ -15,7 +15,7 @@
                                     text-overflow: ellipsis;
                                     white-space: nowrap;
                                     display: block;
-                                    padding: 2px 10px;" href="">{{ $product->name }}</a>
+                                    padding: 2px 10px;" href="{{ $product->url() }}">{{ $product->name }}</a>
             <div class="d-flex align-items-center justify-content-center mt-2">
                 <h5>${{ $product->price }}</h5><h6 class="text-muted ml-2">{{--<del>$1123.00</del>--}}</h6>
             </div>
