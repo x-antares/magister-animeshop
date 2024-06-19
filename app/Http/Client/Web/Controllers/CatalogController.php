@@ -16,10 +16,12 @@ class CatalogController extends Controller
         return view('client.catalog', compact('products'));
     }
 
-    public function search(Request $request)
+    public function filters(Request $request)
     {
-        $products = Product::filterable();
+        $data = $request->all();
 
-        return view('client.catalog', ['products' => $products->paginate(12)]);
+        return response()->json([
+            'url' => $url = route('catalog', $data)
+        ]);
     }
 }

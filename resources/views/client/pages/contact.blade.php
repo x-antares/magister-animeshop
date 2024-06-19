@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('client.layouts.inc.breadcrumbs', )
+@include('client.layouts.inc.breadcrumbs')
 
 <!-- Contact Start -->
 <div class="container-fluid">

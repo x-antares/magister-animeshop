@@ -120,6 +120,8 @@
                         </div>
                     </form>
                 </div>
+                <button class="btn btn-block btn-primary font-weight-bold py-3 js-submit-filters">Фільтрувати</button>
+
                 <!-- Size End -->
             </div>
             <!-- Shop Sidebar End -->
@@ -154,6 +156,9 @@
 {{--                            </div>--}}
                         </div>
                     </div>
+                        @foreach($products as $product)
+                            @include('client.common.card-product', $product)
+                        @endforeach
 {{--                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">--}}
 {{--                        <div class="product-item bg-light mb-4">--}}
 {{--                            <div class="product-img position-relative overflow-hidden">--}}
