@@ -47,7 +47,7 @@ class Cart {
         let count = 0;
 
         this.products.forEach(product => {
-            count += product.quantity;
+            count += parseInt(product.quantity);
         });
 
         return count;
