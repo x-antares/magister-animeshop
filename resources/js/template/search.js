@@ -3,6 +3,10 @@ import { catalog$ } from "./catalog";
 document.querySelector('.js-global-search-btn').addEventListener('click', async (event) => {
     const catalog = catalog$.current();
 
+    if (!catalog.search) {
+        return;
+    }
+
     const url = await catalog.fetchUrl();
 
     if (url) {
