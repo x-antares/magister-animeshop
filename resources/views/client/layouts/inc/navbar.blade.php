@@ -31,13 +31,13 @@
                                 <div class="dropdown-menu position-absolute border-0">
                                     <div class="header-menu__dropdown-menu">
                                         @foreach($category->childs ?? [] as $subcategory)
-                                            <a href="{{ route('catalog', ['categor']) }}" class="dropdown-item">{{ $subcategory->name }}</a>
+                                            <a href="{{ route('catalog', ['filters' => [['attribute' => 'category', 'value' => $subcategory->slug]]]) }}" class="dropdown-item">{{ $subcategory->name }}</a>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                         @else
-                            <a href="{{ $category->slug }}" class="nav-item nav-link">{{ $category->name }}</a>
+                            <a href="{{ route('catalog', ['filters' => [['attribute' => 'category', 'value' => $category->slug]]]) }}" class="nav-item nav-link">{{ $category->name }}</a>
                         @endif
                     @endforeach
                 </div>
