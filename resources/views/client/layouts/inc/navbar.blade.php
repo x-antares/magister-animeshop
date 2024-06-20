@@ -31,7 +31,7 @@
                                 <div class="dropdown-menu position-absolute border-0">
                                     <div class="header-menu__dropdown-menu">
                                         @foreach($category->childs ?? [] as $subcategory)
-                                            <a href="" class="dropdown-item">{{ $subcategory->name }}</a>
+                                            <a href="{{ route('catalog', ['categor']) }}" class="dropdown-item">{{ $subcategory->name }}</a>
                                         @endforeach
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="col-lg-9">
             <nav class="header-menu__navbar navbar navbar-expand-lg bg-dark navbar-dark p-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
+                <a href="/" class="text-decoration-none d-block d-lg-none">
                     <span class="h1 text-uppercase text-dark bg-light px-2">Anime</span>
                     <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
                 </a>
@@ -55,7 +55,7 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="{{ route('home') }}" class="nav-item nav-link">Головна</a>
-{{--                        <a href="{{ route('checkout') }}" class="nav-item nav-link">Покупки</a>--}}
+                        <a href="{{ route('catalog') }}" class="nav-item nav-link">Каталог</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Замовлення <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu border-0">

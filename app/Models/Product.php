@@ -65,6 +65,14 @@ class Product extends Model implements HasMedia
     {
         $attrs = ($attrs ?: request()->all()) + $default;
 
+        $categories = array_column(array_filter( Arr::get($attrs, 'filters'), function ($arr) {
+            return $arr['attribute'] === 'category';
+        }), 'value');
+
+        $brands = array_column(array_filter( Arr::get($attrs, 'filters'), function ($arr) {
+            return $arr['attribute'] === 'brand';
+        }), 'value');
+
         $builder->when($value = Arr::get($attrs, 'search'), fn ($b) =>
             $b->where('name', 'like', '%' . $value . '%')
                 ->orWhereHas('brand', function ($q) use ($value) {
@@ -75,15 +83,15 @@ class Product extends Model implements HasMedia
                 })
         );
 
-        $builder->when($value = Arr::get($attrs, 'filter.brands'), fn ($b) =>
+        $builder->when($value = !empty($brands) ? $brands : false, fn ($b) =>
             $b->whereHas('brand', function ($q) use ($value) {
-                $q->whereIn('id', $value);
+                $q->whereIn('slug', $value);
             })
         );
 
-        $builder->when($value = Arr::get($attrs, 'filter.categories'), fn ($b) =>
+        $builder->when($value = !empty($categories) ? $categories : false, fn ($b) =>
             $b->whereHas('category', function ($q) use ($value) {
-                $q->whereIn('id', $value);
+                $q->whereIn('slug', $value);
             })
         );
 
@@ -104,7 +112,7 @@ class Product extends Model implements HasMedia
             $builder->latest('created_at');
         }
 
-        $val = Arr::get($attrs, 'limit') ?: Arr::get($default, 'limit');
+        $val = Arr::get($attrs, 'per_page') ?: Arr::get($default, 'per_page');
         $builder->when($val, fn($b) => $b->limit($val));
     }
 }
