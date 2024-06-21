@@ -65,14 +65,6 @@ class Product extends Model implements HasMedia
     {
         $attrs = ($attrs ?: request()->all()) + $default;
 
-        $categories = array_column(array_filter( Arr::get($attrs, 'filters'), function ($arr) {
-            return $arr['attribute'] === 'category';
-        }), 'value');
-
-        $brands = array_column(array_filter( Arr::get($attrs, 'filters'), function ($arr) {
-            return $arr['attribute'] === 'brand';
-        }), 'value');
-
         $builder->when($value = Arr::get($attrs, 'search'), fn ($b) =>
             $b->where('name', 'like', '%' . $value . '%')
                 ->orWhereHas('brand', function ($q) use ($value) {
@@ -83,17 +75,27 @@ class Product extends Model implements HasMedia
                 })
         );
 
-        $builder->when($value = !empty($brands) ? $brands : false, fn ($b) =>
-            $b->whereHas('brand', function ($q) use ($value) {
-                $q->whereIn('slug', $value);
-            })
-        );
+        if ($filters = Arr::get($attrs, 'filters')) {
+            $categories = array_column(array_filter( $filters, function ($arr) {
+                return $arr['attribute'] === 'category';
+            }), 'value');
 
-        $builder->when($value = !empty($categories) ? $categories : false, fn ($b) =>
-            $b->whereHas('category', function ($q) use ($value) {
-                $q->whereIn('slug', $value);
-            })
-        );
+            $brands = array_column(array_filter( $filters, function ($arr) {
+                return $arr['attribute'] === 'brand';
+            }), 'value');
+
+            $builder->when($value = !empty($brands) ? $brands : false, fn ($b) =>
+                $b->whereHas('brand', function ($q) use ($value) {
+                    $q->whereIn('slug', $value);
+                })
+            );
+
+            $builder->when($value = !empty($categories) ? $categories : false, fn ($b) =>
+                $b->whereHas('category', function ($q) use ($value) {
+                    $q->whereIn('slug', $value);
+                })
+            );
+        }
 
         if (($min_price = Arr::get($attrs, 'filter.min_price')) && ($max_price = Arr::get($attrs, 'filter.max_price'))) {
             $builder->whereBetween('price', [$min_price, $max_price]);

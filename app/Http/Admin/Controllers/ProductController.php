@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::filterable()->paginate(10);
+        $products = Product::filterable()->get();
         return view('admin.products.index', ['products' => $products]);
     }
 

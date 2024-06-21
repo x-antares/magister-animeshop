@@ -34,8 +34,4 @@ Route::get('/checkout', [CartController::class, 'viewCheckout'])->name('checkout
 
 Route::post('/checkout', [CartController::class, 'checkout']);
 
-Route::get('/contact', function () {
-    return view('client.pages.contact');
-})->name('contact');
-
 require __DIR__ . '/admin.php';

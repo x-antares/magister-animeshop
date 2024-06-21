@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @else
+                        @elseif($category->is_main)
                             <a href="{{ route('catalog', ['filters' => [['attribute' => 'category', 'value' => $category->slug]]]) }}" class="nav-item nav-link">{{ $category->name }}</a>
                         @endif
                     @endforeach
@@ -65,7 +65,6 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ route('contact') }}" class="nav-item nav-link">Контакти</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0 ml-3">

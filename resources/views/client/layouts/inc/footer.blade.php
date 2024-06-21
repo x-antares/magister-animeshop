@@ -16,7 +16,6 @@
                         <a class="text-secondary mb-2" href="{{ route('home') }}"><i class="fa fa-angle-right mr-2"></i>Головна</a>
                         <a class="text-secondary mb-2" href="{{ route('client.cart') }}"><i class="fa fa-angle-right mr-2"></i>Корзина</a>
                         <a class="text-secondary mb-2" href="{{ route('checkout') }}"><i class="fa fa-angle-right mr-2"></i>Оформлення замовлення</a>
-                        <a class="text-secondary" href="{{ route('contact') }}"><i class="fa fa-angle-right mr-2"></i>Контакти</a>
                     </div>
                 </div>
             </div>

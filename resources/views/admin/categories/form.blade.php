@@ -12,5 +12,5 @@
      'label' => 'Підкатегорії',
      'multiple' => true,
      'url_tags' => route('admin.suggest.category'),
-     'help' => '* Виберіть одну або створіть ;'
+     'help' => 'створіть використовуючи ;'
  ]) !!}

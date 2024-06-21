@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
 
 @section('content')
-    @include('client.layouts.inc.breadcrumbs', ['page' => 'Чашка «Фрірен, останнє прощання з мертвими | Sousou no Frieren»'])
+    @include('client.layouts.inc.breadcrumbs', ['page' => $product->name])
 
 
     <!-- Shop Detail Start -->
@@ -11,17 +11,17 @@
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="https://www.pulsar.ua/files/webp/img_products/full_CUP-1662.webp" style="max-height: 600px; object-fit: contain" alt="Image">
+                        <img class="w-100 h-100" src="{{ $product->getMyFirstMediaUrl('images') }}" style="max-height: 600px; object-fit: contain" alt="Image">
                     </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product-2.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product-3.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product-4.jpg" alt="Image">
-                    </div>
+{{--                    <div class="carousel-item">--}}
+{{--                        <img class="w-100 h-100" src="img/product-2.jpg" alt="Image">--}}
+{{--                    </div>--}}
+{{--                    <div class="carousel-item">--}}
+{{--                        <img class="w-100 h-100" src="img/product-3.jpg" alt="Image">--}}
+{{--                    </div>--}}
+{{--                    <div class="carousel-item">--}}
+{{--                        <img class="w-100 h-100" src="img/product-4.jpg" alt="Image">--}}
+{{--                    </div>--}}
                 </div>
 {{--                <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">--}}
 {{--                    <i class="fa fa-2x fa-angle-left text-dark"></i>--}}
@@ -34,7 +34,7 @@
 
         <div class="col-lg-7 h-auto mb-30">
             <div class="h-100 bg-light p-30">
-                <h3>{{--{{ $product->name }}--}}Чашка «Фрірен, останнє прощання з мертвими | Sousou no Frieren»</h3>
+                <h3>{{--{{ $product->name }}--}}{{ $product->name }}</h3>
 {{--                <div class="d-flex mb-3">--}}
 {{--                    <div class="text-primary mr-2">--}}
 {{--                        <small class="fas fa-star"></small>--}}
@@ -46,7 +46,7 @@
 {{--                    <small class="pt-1">(99 Reviews)</small>--}}
 {{--                </div>--}}
                 <h3 class="font-weight-semi-bold mb-4">{{ $product->getFormattedPrice() }}</h3>
-                <p class="mb-4">{{--{{ $product->short_description }}--}}Frieren: Beyond Journey's End (яп. 葬送のフリーレン, Хепберн: Sōsō no Furīren, «Фрірен, останнє прощання з мертвими»)</p>
+                <p class="mb-4">{{--{{ $product->short_description }}--}}{{ $product->description }}</p>
 {{--                <div class="d-flex mb-3">--}}
 {{--                    <strong class="text-dark mr-3">Sizes:</strong>--}}
 {{--                    <form>--}}
@@ -147,10 +147,11 @@
                 <div class="tab-content">
                     @if ($product->body)
                         <div class="tab-pane fade show active" id="tab-pane-1">
+                            {!! $product->body !!}
 {{--                            <h4 class="mb-3">Product Description</h4>--}}
-                            <p>Frieren: Beyond Journey's End (яп. 葬送のフリーレン, Хепберн: Sōsō no Furīren, «Фрірен, останнє прощання з мертвими») — японська манґа, написана Канехіто Ямадою та проілюстрована Цукасою Абе. Публікується в журналі Weekly Shōnen Sunday з квітня 2020 року, до вересня 2023 року було випущено одинадцять томів з вересня 2023 року. Серіал ліцензований в Північній Америці Viz Media. Адаптація у форматі аніме, створена студією Madhouse, стартувала у вересні 2023 року.
+{{--                            <p>Frieren: Beyond Journey's End (яп. 葬送のフリーレン, Хепберн: Sōsō no Furīren, «Фрірен, останнє прощання з мертвими») — японська манґа, написана Канехіто Ямадою та проілюстрована Цукасою Абе. Публікується в журналі Weekly Shōnen Sunday з квітня 2020 року, до вересня 2023 року було випущено одинадцять томів з вересня 2023 року. Серіал ліцензований в Північній Америці Viz Media. Адаптація у форматі аніме, створена студією Madhouse, стартувала у вересні 2023 року.--}}
 
-                                До вересня 2023 року тираж манґи перевищив 10 мільйонів копій. 2021 року манґа виграла 14-ту премію Manga Taishō та премію New Creator Prize 25-ї щорічної культурної премії Тезуки Осаму.</p>
+{{--                                До вересня 2023 року тираж манґи перевищив 10 мільйонів копій. 2021 року манґа виграла 14-ту премію Manga Taishō та премію New Creator Prize 25-ї щорічної культурної премії Тезуки Осаму.</p>--}}
 {{--                            <p>{{ $product->body }}.</p>--}}
                         </div>
                     @endif

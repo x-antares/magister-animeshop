@@ -13,12 +13,17 @@ class CartController extends Controller
     {
         /** @var Cart $cart */
         $cart = Cart::find($request->session()->get('cartId'));
-        $cartProducts = $cart->getAllProducts();
-        $subTotal = $cart->total;
-        $shippingPrice = config('services.shipping_price');
-        $total = $subTotal + $shippingPrice;
 
-        return view('client.cart', compact('cartProducts', 'subTotal', 'shippingPrice', 'total'));
+        if ($cart && !empty($cartProducts = $cart->getAllProducts())) {
+             $cartProducts = $cart->getAllProducts();
+             $subTotal = $cart->total;
+             $shippingPrice = config('services.shipping_price');
+             $total = $subTotal + $shippingPrice;
+
+             return view('client.cart', compact('cartProducts', 'subTotal', 'shippingPrice', 'total'));
+         }
+
+        return redirect()->route('home');
     }
 
     public function getAllCartProducts(Request $request)
@@ -35,24 +40,6 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
-//        $test = [
-////            [
-////                'id' => '0eb673c4-40b7-49da-bafc-141c835d4460',
-////                'is_deleted' => 1,
-////                'quantity' => 3,
-////            ],
-//            [
-//                'id' => '0f152bc1-ac93-43c6-9d49-061ed4087f4f',
-//                'is_deleted' => 0,
-//                'quantity' => 1,
-//            ],
-//            [
-//                'id' => 'bb054c56-c722-4600-8981-ec7040d8fa05',
-//                'is_deleted' => 0,
-//                'quantity' => 3,
-//            ]
-//        ];
-
         /** @var Cart $cart */
         $cart = Cart::find($request->session()->get('cartId'));
 
@@ -91,8 +78,6 @@ class CartController extends Controller
                             $cartProducts[$key]['total'] = $updQty * $product['price'];
                         }
                     }
-
-
                 }
             }
 
@@ -152,17 +137,12 @@ class CartController extends Controller
         return response()->json(['message' => 'Продукт успішно доданий!']);
     }
 
-
     public function viewCheckout(Request $request)
     {
         /** @var Cart $cart */
         $cart = Cart::find($request->session()->get('cartId'));
 
-        $data = $request->data;
-
-
-        if ($cart) {
-            $cartProducts = $cart->getAllProducts();
+        if ($cart && !empty($cartProducts = $cart->getAllProducts())) {
             $shippingPrice = config('services.shipping_price');
 
             $data = [
@@ -172,10 +152,10 @@ class CartController extends Controller
                 'sub_total' => $cart->total,
             ];
 
-            return view('client.checkout', $data ?? []);
+            return view('client.checkout', compact('data'));
         }
 
-        return view('client.checkout', $data ?? []);
+        return redirect()->route('home');
     }
 
     public function checkout(Request $request)
@@ -183,10 +163,19 @@ class CartController extends Controller
         /** @var Cart $cart */
         $cart = Cart::find($request->session()->get('cartId'));
 
-        $order = Order::create($request->only('name', 'email', 'phone', 'address', 'added'));
+        if ($cart) {
+            $added = $request->added;
+            $added['products'] = $cart->getAllProducts();
+            $order = Order::create($request->only('name', 'email', 'phone', 'address') + ['total' => $cart->total, 'added' => $added]);
 
-        foreach ($cart->getAllProducts() as $product) {
-            $order->purchaseProducts()->create($product);
+            foreach ($cart->getAllProducts() as $product) {
+                $order->purchaseProducts()->create($product);
+            }
+
+            session()->forget('cartId');
+            session()->flush();
         }
+
+        return redirect()->route('home');
     }
 }

@@ -13,8 +13,7 @@ class HomeController extends Controller
         $mainCategories = Category::with(['media'])
 //            ->where('is_main', 1) // for selected categories and menu categories
             ->withCount('products')
-            ->take(4)
-//            ->take(12)
+            ->take(20)
             ->get();
 
         $featuredProducts = Product::with([/*'reviews', */'media'])

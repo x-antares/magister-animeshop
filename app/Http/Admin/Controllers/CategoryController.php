@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('is_main', 1)->paginate(10);
+        $categories = Category::where('is_main', 1)->orderBy('created_at', 'desc')->get();
 
         return view('admin.categories.index', ['categories' => $categories]);
     }

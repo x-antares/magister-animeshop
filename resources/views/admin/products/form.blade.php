@@ -33,7 +33,7 @@
        'class' => 'f-summernote',
 ]) !!}
 
-{!! Lte3::number('price', isset($product) ? $product->price : null, ['label' => 'Ціна', 'default' => 0, 'min' => 1]) !!}
+{!! Lte3::number('price', isset($product) ? $product->price : null, ['label' => 'Ціна, $', 'default' => 0, 'min' => 1]) !!}
 
 {!! Lte3::checkbox('is_featured', null, ['label' => 'Обраний', 'class_wrap' => 'icheck-primary']) !!}
 

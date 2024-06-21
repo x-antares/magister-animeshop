@@ -7,9 +7,9 @@
     ])
 
     <section class="content">
-        <div class="mb-4">
-            <a href="#" class="btn btn-success btn-flat js-modal-fill-html" data-fn-inits="initSelect2" data-target='#modal-lg' data-url="{{ route('admin.orders.create') }}" ><i class="fa fa-plus"></i> Додати</a>
-        </div>
+{{--        <div class="mb-4">--}}
+{{--            <a href="#" class="btn btn-success btn-flat js-modal-fill-html" data-fn-inits="initSelect2" data-target='#modal-lg' data-url="{{ route('admin.orders.create') }}" ><i class="fa fa-plus"></i> Додати</a>--}}
+{{--        </div>--}}
 
             <!-- LIST/TABLE -->
         <div class="card">

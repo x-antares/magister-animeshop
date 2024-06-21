@@ -1,7 +1,7 @@
 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
     <div class="product-item bg-light mb-4">
         <div class="product-img position-relative overflow-hidden">
-            <img class="img-fluid w-100" style="max-height: 370px; object-fit: cover;" src="{{ $product->getMyFirstMediaUrl('images') }}" alt="">
+            <img class="img-fluid w-100" style="max-height: 370px; object-fit: contain;" src="{{ $product->getMyFirstMediaUrl('images') }}" alt="">
             <div class="product-action">
                 <a class="btn btn-outline-dark btn-square js-simple-add-to-cart" data-product-id="{{ $product->id }}"><i class="fa fa-shopping-cart"></i></a>
 

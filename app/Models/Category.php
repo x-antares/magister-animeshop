@@ -27,6 +27,10 @@ class Category extends Model implements HasMedia
         'is_published' => 'boolean',
     ];
 
+    protected $attributes = [
+        'is_published' => 1
+    ];
+
     protected array $mediaSingleCollections = ['image'];
 
     /**

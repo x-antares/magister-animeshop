@@ -83,7 +83,7 @@ document.querySelectorAll('.js-main-add-to-cart').forEach(item => {
 
         const choosenQuantityItem = item.parentNode.querySelector('.js-cart-product-quantity');
 
-        await cart.add(item.dataset.productId, choosenQuantityItem.value);
+        await cart.change(item.dataset.productId, choosenQuantityItem.value);
 
         await cart.fetch();
 
